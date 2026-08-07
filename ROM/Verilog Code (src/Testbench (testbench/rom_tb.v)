@@ -1,0 +1,34 @@
+`timescale 1ns/1ps
+
+module rom_tb;
+
+reg [2:0] addr;
+wire [7:0] data;
+
+rom uut(
+    .addr(addr),
+    .data(data)
+);
+
+initial begin
+
+    $dumpfile("dump.vcd");
+    $dumpvars(0, rom_tb);
+
+    addr = 3'b000; #10;
+    addr = 3'b001; #10;
+    addr = 3'b010; #10;
+    addr = 3'b011; #10;
+    addr = 3'b100; #10;
+    addr = 3'b101; #10;
+    addr = 3'b110; #10;
+    addr = 3'b111; #10;
+
+    $finish;
+end
+
+initial begin
+    $monitor("Time=%0t Address=%b Data=%b", $time, addr, data);
+end
+
+endmodule
